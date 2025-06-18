@@ -27,6 +27,8 @@ namespace Web.Pages
         [BindProperty]
         public IFormFile Upload { get; set; }
 
+        public string UploadErrorMessage { get; set; }
+
         public async Task OnGetAsync()
         {
             var imagesUrl = _options.ApiUrl;
@@ -42,8 +44,17 @@ namespace Web.Pages
         {
             if (Upload != null && Upload.Length > 0)
             {
+                // Check file extension and content type
+                var allowedContentTypes = new[] { "image/jpeg", "image/png" };
+                var allowedExtensions = new[] { ".jpg", ".jpeg", ".png" };
+                var fileExtension = System.IO.Path.GetExtension(Upload.FileName).ToLowerInvariant();
+                if (!allowedContentTypes.Contains(Upload.ContentType) || !allowedExtensions.Contains(fileExtension))
+                {
+                    UploadErrorMessage = "อัพโหลดไฟล์รูปเท่านั้น";
+                    await OnGetAsync(); // To refresh the image list
+                    return Page();
+                }
                 var imagesUrl = _options.ApiUrl;
-
                 using (var image = new StreamContent(Upload.OpenReadStream()))
                 {
                     image.Headers.ContentType = new MediaTypeHeaderValue(Upload.ContentType);
