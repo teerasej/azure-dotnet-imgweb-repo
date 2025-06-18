@@ -20,6 +20,12 @@
                 Upload a new image
             </div>
             <div class="card-body">
+                @if (!ViewData.ModelState.IsValid && ViewData.ModelState["Upload"] != null)
+                {
+                    <div class="alert alert-danger" role="alert">
+                        @ViewData.ModelState["Upload"].Errors[0].ErrorMessage
+                    </div>
+                }
                 <form method="post" enctype="multipart/form-data">
                     <div class="custom-file">
                         <input type="file" class="custom-file-input" asp-for="Upload">

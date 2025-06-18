@@ -42,8 +42,15 @@ namespace Web.Pages
         {
             if (Upload != null && Upload.Length > 0)
             {
+                // Validate file type
+                var allowedTypes = new[] { "image/jpeg", "image/png" };
+                if (!allowedTypes.Contains(Upload.ContentType))
+                {
+                    ModelState.AddModelError("Upload", "อัพโหลดไฟล์รูปเท่านั้น");
+                    await OnGetAsync(); // To reload the image list
+                    return Page();
+                }
                 var imagesUrl = _options.ApiUrl;
-
                 using (var image = new StreamContent(Upload.OpenReadStream()))
                 {
                     image.Headers.ContentType = new MediaTypeHeaderValue(Upload.ContentType);
