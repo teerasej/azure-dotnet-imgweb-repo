@@ -33,7 +33,8 @@ namespace Web
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<Options>(_configuration.Get<Options>());
+            var options = _configuration.Get<Options>() ?? new Options();
+            services.AddSingleton<Options>(options);
             services.AddSingleton<HttpClient>(new HttpClient());
             services.AddRazorPages();
         }

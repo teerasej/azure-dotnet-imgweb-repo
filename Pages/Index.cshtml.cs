@@ -29,25 +29,45 @@ namespace Web.Pages
 
         public async Task OnGetAsync()
         {
-            var imagesUrl = _options.ApiUrl;
+            // Initialize ImageList to avoid null reference exception
+            this.ImageList = new List<string>();
 
-            string imagesJson = await _httpClient.GetStringAsync(imagesUrl);
+            var imagesUrl = _options?.ApiUrl;
 
-            IEnumerable<string> imagesList = JsonConvert.DeserializeObject<IEnumerable<string>>(imagesJson);
-
-            this.ImageList = imagesList.ToList<string>();
+            // Only attempt to fetch images if API URL is configured
+            if (!string.IsNullOrEmpty(imagesUrl))
+            {
+                try
+                {
+                    string imagesJson = await _httpClient.GetStringAsync(imagesUrl);
+                    IEnumerable<string> imagesList = JsonConvert.DeserializeObject<IEnumerable<string>>(imagesJson);
+                    this.ImageList = imagesList?.ToList() ?? new List<string>();
+                }
+                catch
+                {
+                    // If there's any error fetching images, keep the empty list
+                    this.ImageList = new List<string>();
+                }
+            }
         }
 
         public async Task<IActionResult> OnPostAsync()
         {
-            if (Upload != null && Upload.Length > 0)
+            if (Upload != null && Upload.Length > 0 && !string.IsNullOrEmpty(_options?.ApiUrl))
             {
                 var imagesUrl = _options.ApiUrl;
 
-                using (var image = new StreamContent(Upload.OpenReadStream()))
+                try
                 {
-                    image.Headers.ContentType = new MediaTypeHeaderValue(Upload.ContentType);
-                    var response = await _httpClient.PostAsync(imagesUrl, image);
+                    using (var image = new StreamContent(Upload.OpenReadStream()))
+                    {
+                        image.Headers.ContentType = new MediaTypeHeaderValue(Upload.ContentType);
+                        var response = await _httpClient.PostAsync(imagesUrl, image);
+                    }
+                }
+                catch
+                {
+                    // If there's any error uploading, continue without error to avoid breaking the page
                 }
             }
             return RedirectToPage("/Index");
