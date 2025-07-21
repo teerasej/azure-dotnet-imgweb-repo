@@ -20,10 +20,17 @@
                 Upload a new image
             </div>
             <div class="card-body">
-                <form method="post" enctype="multipart/form-data">
-                    <div class="custom-file">
-                        <input type="file" class="custom-file-input" asp-for="Upload">
-                        <label class="custom-file-label">Choose image</label>
+                <form method="post" enctype="multipart/form-data" id="uploadForm">
+                    <div class="form-group">
+                        <label for="fileNameInput">File Name (optional, max 50 characters):</label>
+                        <input type="text" class="form-control" id="fileNameInput" asp-for="FileName" maxlength="50" placeholder="Enter file name or leave empty to use original name">
+                        <small class="form-text text-muted">Maximum 50 characters allowed.</small>
+                    </div>
+                    <div class="form-group">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" asp-for="Upload" id="fileInput">
+                            <label class="custom-file-label" for="fileInput">Choose image</label>
+                        </div>
                     </div>
                     <button type="submit" class="btn btn-secondary">Upload</button>
                 </form>
@@ -53,5 +60,49 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
+    <script>
+        // Update file label when file is selected
+        document.getElementById('fileInput').addEventListener('change', function(e) {
+            var fileName = e.target.files[0]?.name || 'Choose image';
+            document.querySelector('.custom-file-label').textContent = fileName;
+        });
+
+        // Handle form submission with file name validation
+        document.getElementById('uploadForm').addEventListener('submit', function(e) {
+            var fileInput = document.getElementById('fileInput');
+            var fileNameInput = document.getElementById('fileNameInput');
+            
+            // Check if a file is selected
+            if (!fileInput.files || fileInput.files.length === 0) {
+                alert('Please select a file to upload.');
+                e.preventDefault();
+                return false;
+            }
+            
+            var fileName = fileNameInput.value.trim();
+            var originalFileName = fileInput.files[0].name;
+            
+            // If file name is empty, show confirmation popup
+            if (fileName === '') {
+                var useOriginalName = confirm('No file name provided. Do you want to use the original file name "' + originalFileName + '"?');
+                if (useOriginalName) {
+                    // Extract filename without extension for the input
+                    var nameWithoutExt = originalFileName.substring(0, originalFileName.lastIndexOf('.')) || originalFileName;
+                    fileNameInput.value = nameWithoutExt.substring(0, 50); // Ensure it doesn't exceed 50 chars
+                } else {
+                    e.preventDefault();
+                    return false;
+                }
+            }
+            
+            // Validate file name length
+            if (fileNameInput.value.length > 50) {
+                alert('File name cannot exceed 50 characters.');
+                e.preventDefault();
+                return false;
+            }
+        });
+    </script>
 </body>
 </html>
