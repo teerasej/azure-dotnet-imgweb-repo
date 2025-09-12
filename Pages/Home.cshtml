@@ -1,0 +1,119 @@
+@page "/"
+@namespace Web.Pages
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model HomeModel
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="~/css/site.css">
+    <title>Contoso Photo Gallery - Home</title>
+</head>
+<body class="bg-white">
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="nav-flex">
+                <div class="nav-brand">
+                    <h1>Contoso Photo Gallery</h1>
+                </div>
+                <div class="nav-links">
+                    <a href="/" class="nav-link active">Home</a>
+                    <a href="/Gallery" class="nav-link">Gallery</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <main class="flex-1">
+        <div class="hero">
+            <div class="hero-container">
+                <div class="hero-content">
+                    <main class="hero-main">
+                        <div class="hero-text">
+                            <h1 class="hero-title">
+                                <span>Welcome to</span>
+                                <span class="hero-title-highlight">Contoso Photo Gallery</span>
+                            </h1>
+                            <p class="hero-description">
+                                Share your beautiful moments with the world. Upload, view, and manage your photo collection in our modern, easy-to-use gallery platform.
+                            </p>
+                            <div class="hero-buttons">
+                                <a href="/Gallery" class="btn btn-primary">View Gallery</a>
+                                <a href="/Gallery" class="btn btn-secondary">Upload Photos</a>
+                            </div>
+                        </div>
+                    </main>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="text-center">
+                    <svg class="mx-auto" style="height: 8rem; width: 8rem; color: var(--custom-orange);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                    </svg>
+                    <p class="mt-4" style="font-size: 1.125rem; color: var(--custom-orange-dark); font-weight: 500;">Your Photos Await</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <div class="features">
+            <div class="container">
+                <div class="features-header">
+                    <h2>Features</h2>
+                    <p class="features-title">
+                        Everything you need for photo management
+                    </p>
+                </div>
+
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path>
+                            </svg>
+                        </div>
+                        <p class="feature-title">Easy Upload</p>
+                        <p class="feature-description">
+                            Upload your photos with a simple drag and drop interface or file selection.
+                        </p>
+                    </div>
+
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
+                            </svg>
+                        </div>
+                        <p class="feature-title">Gallery View</p>
+                        <p class="feature-description">
+                            View all your photos in a beautiful, responsive grid layout.
+                        </p>
+                    </div>
+
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                            </svg>
+                        </div>
+                        <p class="feature-title">Secure Storage</p>
+                        <p class="feature-description">
+                            Your photos are stored securely in the cloud with reliable backup and access.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container py-6">
+            <p>&copy; 2024 Contoso Photo Gallery. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

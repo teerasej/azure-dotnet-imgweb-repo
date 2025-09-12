@@ -1,0 +1,108 @@
+@page
+@namespace Web.Pages
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model GalleryModel
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="~/css/site.css">
+    <title>Contoso Photo Gallery</title>
+</head>
+<body class="bg-white min-h-screen">
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="nav-flex">
+                <div class="nav-brand">
+                    <h1>Contoso Photo Gallery</h1>
+                </div>
+                <div class="nav-links">
+                    <a href="/" class="nav-link">Home</a>
+                    <a href="/Gallery" class="nav-link active">Gallery</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container" style="padding-top: 1.5rem;">
+        <!-- Upload Section -->
+        <div class="mb-8">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Upload a new image</h2>
+                </div>
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data" class="space-y-4">
+                        <div class="form-group">
+                            <label class="form-label">Choose image file</label>
+                            <input type="file" 
+                                   asp-for="Upload" 
+                                   class="file-input">
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <svg class="mr-2" style="margin-left: -0.25rem; height: 1rem; width: 1rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path>
+                            </svg>
+                            Upload
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gallery Section -->
+        <div>
+            <h1 class="text-center mb-8" style="font-size: 1.875rem; font-weight: 700; color: var(--gray-900);">
+                <span style="color: var(--custom-orange);">Photo</span> Gallery
+            </h1>
+            
+            @if (Model.ImageList.Count > 0)
+            {
+                <div class="gallery-grid">
+                    @foreach (string imageUrl in Model.ImageList)
+                    {
+                        <div class="gallery-item">
+                            <div class="gallery-image-container">
+                                <img src="@imageUrl" 
+                                     class="gallery-image" 
+                                     alt="Gallery image" />
+                                <div class="gallery-overlay"></div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="empty-state">
+                    <div class="empty-state-icon">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                        </svg>
+                    </div>
+                    <h3>No images found</h3>
+                    <p>Get started by uploading your first photo above.</p>
+                    <div class="mt-6">
+                        <button type="button" onclick="document.querySelector('input[type=file]').click()" 
+                                class="btn btn-primary">
+                            <svg class="mr-2" style="margin-left: -0.25rem; height: 1rem; width: 1rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                            </svg>
+                            Upload your first photo
+                        </button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container py-6">
+            <p>&copy; 2024 Contoso Photo Gallery. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

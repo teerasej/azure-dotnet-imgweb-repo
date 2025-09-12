@@ -2,11 +2,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Web.Pages
 {
-    public class IndexModel : PageModel
+    public class HomeModel : PageModel
     {
         public void OnGet()
         {
-            // This page now redirects to Home - no logic needed
+            // Simple home page - no special logic needed
         }
     }
 }
