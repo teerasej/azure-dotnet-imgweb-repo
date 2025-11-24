@@ -37,11 +37,7 @@ namespace Web.Pages
 
                 IEnumerable<string> imagesList = JsonConvert.DeserializeObject<IEnumerable<string>>(imagesJson);
 
-                this.ImageList = imagesList.ToList<string>();
-            }
-            else
-            {
-                this.ImageList = new List<string>();
+                this.ImageList = imagesList.ToList();
             }
         }
 
