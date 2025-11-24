@@ -47,7 +47,7 @@ namespace Web.Pages
 
         public async Task<IActionResult> OnPostAsync()
         {
-            if (Upload != null && Upload.Length > 0)
+            if (Upload != null && Upload.Length > 0 && !string.IsNullOrEmpty(_options.ApiUrl))
             {
                 var imagesUrl = _options.ApiUrl;
 
