@@ -12,8 +12,8 @@ namespace Web.Pages
 {
     public class GalleryModel : PageModel
     {
-        private HttpClient _httpClient;
-        private Options _options;
+        private readonly HttpClient _httpClient;
+        private readonly Options _options;
 
         public GalleryModel(HttpClient httpClient, Options options)
         {
@@ -22,7 +22,7 @@ namespace Web.Pages
         }
 
         [BindProperty]
-        public List<string> ImageList { get; private set; }
+        public List<string> ImageList { get; private set; } = new List<string>();
 
         [BindProperty]
         public IFormFile Upload { get; set; }
@@ -55,6 +55,11 @@ namespace Web.Pages
                 {
                     image.Headers.ContentType = new MediaTypeHeaderValue(Upload.ContentType);
                     var response = await _httpClient.PostAsync(imagesUrl, image);
+                    if (!response.IsSuccessStatusCode)
+                    {
+                        ModelState.AddModelError(string.Empty, "Image upload failed. Please try again.");
+                        return Page();
+                    }
                 }
             }
             return RedirectToPage("/Gallery");
