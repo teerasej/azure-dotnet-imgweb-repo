@@ -1,0 +1,15 @@
+# Build outputs
+[Bb]in/
+[Oo]bj/
+
+# User-specific files
+*.user
+*.rsuser
+*.suo
+
+# IDE settings
+.vs/
+.vscode/
+
+# OS files
+.DS_Store
