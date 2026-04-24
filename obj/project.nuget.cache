@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "LBhMxaUdeCk=",
+  "success": true,
+  "projectFilePath": "/Users/teerasej/Desktop/azure-dotnet-imgweb-repo/Web.csproj",
+  "expectedPackageFiles": [
+    "/Users/teerasej/.nuget/packages/newtonsoft.json/13.0.1/newtonsoft.json.13.0.1.nupkg.sha512",
+    "/Users/teerasej/.nuget/packages/microsoft.netcore.app.ref/8.0.22/microsoft.netcore.app.ref.8.0.22.nupkg.sha512",
+    "/Users/teerasej/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.22/microsoft.aspnetcore.app.ref.8.0.22.nupkg.sha512",
+    "/Users/teerasej/.nuget/packages/microsoft.netcore.app.host.osx-arm64/8.0.22/microsoft.netcore.app.host.osx-arm64.8.0.22.nupkg.sha512"
+  ],
+  "logs": []
+}
