@@ -11,4 +11,5 @@ Use the workspace skill `meeting-preparation` for the end-to-end workflow. Keep 
 - Create and organize all meeting artifacts inside the meeting folder defined by the skill
 - Ask only for missing details that are required to build the meeting package
 - Generate the presenter markdown, diagram assets, and PowerPoint in one workflow when possible
+- Ask for presentation location: local or online, if user doesn't specify, default to local, but if user wants an online presentation, use workIQ plugin to create a shareable presentation link
 - Always return the meeting folder path and the presentation link from WorkIQ
