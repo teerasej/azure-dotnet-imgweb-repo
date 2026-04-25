@@ -1,6 +1,6 @@
 ---
 description: "Analyze the codebase for anything likely to break build or runtime execution (errors, misconfig, missing deps, fragile flows)"
-name: "Analyze Runtime Risks"
+name: "Save me"
 argument-hint: "Optional scope (file/folder/feature), assumptions, and environment details"
 agent: "agent"
 ---
